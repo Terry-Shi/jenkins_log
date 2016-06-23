@@ -1,41 +1,37 @@
 # list of jobs to be exported and their mapping to job type
 jobFilter:  
- - jobName: DEVOPS-R4.5-CODAR-PACKAGE-DEPLOY
+ - jobName: Data-Match 1 Commit
+   jobType: FETCH
+ - jobName: Data-Match 2 Assemble
+   jobType: BUILD
+ - jobName: Data-Match-Installer 3 Assemble Ansible
+   jobType: BUILD
+ - jobName: Data-Match-Installer 4 Deploy
    jobType: DEPLOY
- - jobName: DEVOPS-R4.5-ALM-UFT-PC-TEST-MT
-   jobType: TEST
- - jobName: DEVOPS-R4.5-ALM-UFT-PC-TEST-JAVA
-   jobType: TEST
- - jobName: DEVOPS-R4.5-ALM-UFT-PC-TEST-DOTNET
-   jobType: TEST
- - jobName: DEVOPS-R4.5-JENKINS-iBank-GIT-JAVA
+ - jobName: Database 1 Download
    jobType: BUILD
- - jobName: DEVOPS-R4.5-BUILD-iBank-TFS-DOTNET
-   jobType: BUILD
+ - jobName: Database 2 Deploy
+   jobType: DEPLOY
 
 # job name to pipeline mapping 
 jobPipeline:
-    DEVOPS-CODAR-R4.5-1-BUILD: CODAR-MT
-    DEVOPS-CODAR-R4.5-1-BUILD-JAVA: JAVA
-    DEVOPS-CODAR-R4.5-1-BUILD-DOTNET: DOTNET
-    DEVOPS-R4.5-DOCKER-1-DEV: DOCKER
-    DEVOPS-JAVA-E2E-R4.5-1-BUILD: JAVA-E2E
+    Data-Match 1 Commit: Data-Match
+    Data-Match 2 Assemble: Data-Match
+    Data-Match-Installer 3 Assemble Ansible: Data-Match
+    Data-Match-Installer 4 Deploy: Data-Match
+    Database 1 Download: Database
+    Database 2 Deploy: Database
 
 # job stage is defined by the suffix of the job name
 jobStage:
- - suffix: "-BUILD" 
+ - suffix: "Commit"
+   stage: "FETCH"
+ - suffix: "Assemble"
    stage: "BUILD"
- - suffix: "TFS-DOTNET" 
+ - suffix: "Ansible"
    stage: "BUILD"
- - suffix: "-STG" 
-   stage: "STG"
- - suffix: "-DV-INT" 
-   stage: "DEV"
- - suffix: "-DEV" 
-   stage: "DEV"
- - suffix: "-QA" 
-   stage: "QA"
- - suffix: "-PROD" 
-   stage: "PROD"
- - suffix: "-TEST" 
-   stage: "TEST"
+ - suffix: "Deploy"
+   stage: "DEPLOY"
+ - suffix: "Download"
+   stage: "DOWNLOAD"
+

@@ -55,7 +55,7 @@ func init() {
 }
 
 func main() {
-
+	fmt.Print("first line of code !")
 	var URL string
 	var username string
 	var password string
@@ -96,6 +96,9 @@ func main() {
 					fmt.Printf("%d,%d,%s,%s,%s,%s,%s,%s,%d\n", b.Number, rid, f.JobType, pipeline, stage, f.JobName, ts.Format(time.RFC3339), b.Result, b.Duration)
 					logger.Printf("%d,%d,%s,%s,%s,%s,%s,%s,%d\n", b.Number, rid, f.JobType, pipeline, stage, f.JobName, ts.Format(time.RFC3339), b.Result, b.Duration)
 				} else {
+					stage := b.Stage()
+					fmt.Printf("%d,%d,%s,%s,%s,%s,%s,%s,%d\n", b.Number, rid, f.JobType, pipeline, stage, f.JobName, ts.Format(time.RFC3339), b.Result, b.Duration)
+
 					logger.Printf("Unable to find a parent upstream job - job started manually ?\n")
 				}
 			} else {

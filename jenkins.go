@@ -6,6 +6,8 @@ import (
 	"io/ioutil"
 	"net/http"
 	"strings"
+
+	"crypto/tls"
 )
 
 type Jenkins struct {
@@ -24,6 +26,12 @@ func NewJenkins(Url, Username, Password string) *Jenkins {
 		client:   &http.Client{},
 		cache:    make(map[string]Job),
 	}
+	tr := &http.Transport{
+		TLSClientConfig: &tls.Config{InsecureSkipVerify: true},
+	}
+	// TODO: should find a better way to handle "x509: certificate signed by unknown authoritypanic:"
+	jk.client = &http.Client{Transport: tr}
+
 	return jk
 }
 
@@ -38,8 +46,16 @@ func (jk *Jenkins) JobDetails(name string) Job {
 	req, _ := http.NewRequest("GET", jk.Url+"/job/"+name+"/api/json", nil)
 	req.SetBasicAuth(jk.Username, jk.Password)
 	req.Header.Set("Accept", "application/json")
+
 	res, _ := jk.client.Do(req)
+	//if (err != nil) {
+	//	return
+	//}
 	b1, _ := ioutil.ReadAll(res.Body)
+	//if (err != nil) {
+	//	return
+	//}
+
 	defer res.Body.Close()
 	aj := &Job{}
 	json.Unmarshal(b1, aj)
