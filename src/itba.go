@@ -90,7 +90,7 @@ func main() {
 			ts := time.Unix(0, b.Timestamp*int64(time.Millisecond))
 			if b.Result != "" {
 				logger.Printf("Getting parent upstream job %s-%d\n", f.JobName, b.Number)
-				rid, pipeline := GetUpstreamJob(jk, f.JobName, b.Number)
+				rid, pipeline := GetUpstreamJob(jk, f.JobName, b.Number) // TODO should get "pipeline" when rid==0
 				if rid != 0 {
 					stage := b.Stage()
 					fmt.Printf("%d,%d,%s,%s,%s,%s,%s,%s,%d\n", b.Number, rid, f.JobType, pipeline, stage, f.JobName, ts.Format(time.RFC3339), b.Result, b.Duration)
