@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"io/ioutil"
 	"net/http"
-	"strings"
+	//"strings"
 
 	"crypto/tls"
 )
@@ -43,7 +43,7 @@ func (jk *Jenkins) JobDetails(name string) Job {
 		logger.Printf("Details found in cache [%d] %s\n", len(jk.cache), name)
 		return item
 	}
-	req, _ := http.NewRequest("GET", jk.Url+"/job/"+name+"/api/json", nil)
+	req, _ := http.NewRequest("GET", jk.Url+"/job/"+name+"/api/json", nil) // 某个Job的信息
 	req.SetBasicAuth(jk.Username, jk.Password)
 	req.Header.Set("Accept", "application/json")
 
@@ -60,7 +60,9 @@ func (jk *Jenkins) JobDetails(name string) Job {
 	aj := &Job{}
 	json.Unmarshal(b1, aj)
 	for i, ab := range aj.Builds {
-		url := fmt.Sprintf(jk.Url+"/job/%s/%d/api/json", name, ab.Number)
+		url := fmt.Sprintf(jk.Url+"/job/%s/%d/api/json", name, ab.Number) // 某次Build的输出信息
+		// DEBUG
+		fmt.Println(url)
 		req2, _ := http.NewRequest("GET", url, nil)
 		req2.SetBasicAuth(jk.Username, jk.Password)
 		req2.Header.Set("Accept", "application/json")
@@ -100,26 +102,26 @@ type Build struct {
 }
 
 // Stage returns the stage of a given job by looking up on the build chain to find the first job matching the suffix search
-func (bld Build) Stage() string {
-	stg := "UNK"
-	logger.Printf("stage processing build %d - %s\n", bld.Number, stg)
-	for _, a := range bld.Actions {
-		for i, c := range a.Causes {
-			for _, js := range conf.JobStage {
-				if strings.Contains(c.Up, js.Suffix) {
-					stg = js.Stage
-					break
-				}
-			}
-			logger.Printf("stage causes [%d] %s - stage: %s\n", i, c.Up, stg)
-			if stg != "UNK" {
-				break
-			}
-		}
-	}
-	logger.Printf("stage return: %s\n", stg)
-	return stg
-}
+//func (bld Build) Stage() string {
+//	stg := "UNK"
+//	logger.Printf("stage processing build %d - %s\n", bld.Number, stg)
+//	for _, a := range bld.Actions {
+//		for i, c := range a.Causes {
+//			for _, js := range conf.JobStage {
+//				if strings.Contains(c.Up, js.Suffix) {
+//					stg = js.Stage
+//					break
+//				}
+//			}
+//			logger.Printf("stage causes [%d] %s - stage: %s\n", i, c.Up, stg)
+//			if stg != "UNK" {
+//				break
+//			}
+//		}
+//	}
+//	logger.Printf("stage return: %s\n", stg)
+//	return stg
+//}
 
 type Action struct {
 	Causes     []Upstream  `json:"causes,omitempty`

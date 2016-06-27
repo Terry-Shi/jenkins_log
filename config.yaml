@@ -25,7 +25,7 @@ jobPipeline:
 # job stage is defined by the suffix of the job name
 jobStage:
  - suffix: "Commit"
-   stage: "FETCH"
+   stage: "BUILD"
  - suffix: "Assemble"
    stage: "BUILD"
  - suffix: "Ansible"

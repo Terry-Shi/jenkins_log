@@ -45,6 +45,7 @@ import (
 	"log"
 	"os"
 	"time"
+	"strings"
 )
 
 var logger log.Logger
@@ -82,9 +83,9 @@ func main() {
 
 	jk := NewJenkins(URL, username, password)
 	fmt.Printf("%s,%s,%s,%s,%s,%s,%s,%s,%s\n", "JOB_ID", "REL_ID", "JOB_TYPE", "PIPELINE", "STAGE", "JOB_NAME", "START_TIME", "JOB_RESULT", "DURATION")
-	for _, f := range conf.Filters {
+	for _, f := range conf.Filters { // 遍历所有Job
 		logger.Printf("Getting details for job: %s\n", f.JobName)
-		jd := jk.JobDetails(f.JobName)
+		jd := jk.JobDetails(f.JobName) // 读取一个Job的信息
 		for _, b := range jd.Builds {
 			logger.Printf("Processing build %s-%d\n", f.JobName, b.Number)
 			ts := time.Unix(0, b.Timestamp*int64(time.Millisecond))
@@ -92,11 +93,13 @@ func main() {
 				logger.Printf("Getting parent upstream job %s-%d\n", f.JobName, b.Number)
 				rid, pipeline := GetUpstreamJob(jk, f.JobName, b.Number) // TODO should get "pipeline" when rid==0
 				if rid != 0 {
-					stage := b.Stage()
+					//stage := b.Stage()
+					stage := getStage(f.JobName)
 					fmt.Printf("%d,%d,%s,%s,%s,%s,%s,%s,%d\n", b.Number, rid, f.JobType, pipeline, stage, f.JobName, ts.Format(time.RFC3339), b.Result, b.Duration)
 					logger.Printf("%d,%d,%s,%s,%s,%s,%s,%s,%d\n", b.Number, rid, f.JobType, pipeline, stage, f.JobName, ts.Format(time.RFC3339), b.Result, b.Duration)
 				} else {
-					stage := b.Stage()
+					//stage := b.Stage()
+					stage := getStage(f.JobName)
 					fmt.Printf("%d,%d,%s,%s,%s,%s,%s,%s,%d\n", b.Number, rid, f.JobType, pipeline, stage, f.JobName, ts.Format(time.RFC3339), b.Result, b.Duration)
 
 					logger.Printf("Unable to find a parent upstream job - job started manually ?\n")
@@ -108,4 +111,15 @@ func main() {
 	}
 	logger.Printf("==== itba stop ====\n")
 
+}
+
+func getStage(jobName string) string {
+	stg := "UNK"
+	for _, js := range conf.JobStage {
+		if strings.Contains(jobName, js.Suffix) {
+			stg = js.Stage
+			break
+		}
+	}
+	return stg
 }
