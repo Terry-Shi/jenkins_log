@@ -42,21 +42,17 @@ package main
 import (
 	"flag"
 	"fmt"
-	"log"
+	//"log"
 	"os"
 	"time"
-	"strings"
+	//"strings"
+	."./util"
 )
 
-var logger log.Logger
-var conf *Config
 
-func init() {
-	logger = *log.New(os.Stderr, "itba: ", log.LstdFlags)
-}
 
 func main() {
-	fmt.Print("first line of code !")
+
 	var URL string
 	var username string
 	var password string
@@ -73,53 +69,52 @@ func main() {
 		flag.PrintDefaults()
 		return
 	}
-	logger.Printf("==== itba start ====\n")
+	Logger.Printf("==== itba start ====\n")
 
-	conf = &Config{}
-	loadConfig(conf, cfile)
-	logger.Printf("Loaded [%d] job filters\n", len(conf.Filters))
-	logger.Printf("Loaded [%d] job pipeline mappings \n", len(conf.JobPipelines))
-	logger.Printf("Loaded [%d] job stage mappings \n", len(conf.JobStage))
+	Conf = &Config{}
+	LoadConfig(Conf, cfile)
+	Logger.Printf("Loaded [%d] job filters\n", len(Conf.Filters))
+	Logger.Printf("Loaded [%d] job pipeline mappings \n", len(Conf.JobPipelines))
+	Logger.Printf("Loaded [%d] job stage mappings \n", len(Conf.JobStage))
 
 	jk := NewJenkins(URL, username, password)
 	fmt.Printf("%s,%s,%s,%s,%s,%s,%s,%s,%s\n", "JOB_ID", "REL_ID", "JOB_TYPE", "PIPELINE", "STAGE", "JOB_NAME", "START_TIME", "JOB_RESULT", "DURATION")
-	for _, f := range conf.Filters { // 遍历所有Job
-		logger.Printf("Getting details for job: %s\n", f.JobName)
+	for _, f := range Conf.Filters { // 遍历所有Job
+		Logger.Printf("Getting details for job: %s\n", f.JobName)
 		jd := jk.JobDetails(f.JobName) // 读取一个Job的信息
 		for _, b := range jd.Builds {
-			logger.Printf("Processing build %s-%d\n", f.JobName, b.Number)
+			Logger.Printf("Processing build %s-%d\n", f.JobName, b.Number)
 			ts := time.Unix(0, b.Timestamp*int64(time.Millisecond))
 			if b.Result != "" {
-				logger.Printf("Getting parent upstream job %s-%d\n", f.JobName, b.Number)
+				Logger.Printf("Getting parent upstream job %s-%d\n", f.JobName, b.Number)
 				rid, pipeline := GetUpstreamJob(jk, f.JobName, b.Number) // TODO should get "pipeline" when rid==0
 				if rid != 0 {
-					//stage := b.Stage()
-					stage := getStage(f.JobName)
+					stage := b.Stage()
+					//stage := getStage(f.JobName)
 					fmt.Printf("%d,%d,%s,%s,%s,%s,%s,%s,%d\n", b.Number, rid, f.JobType, pipeline, stage, f.JobName, ts.Format(time.RFC3339), b.Result, b.Duration)
-					logger.Printf("%d,%d,%s,%s,%s,%s,%s,%s,%d\n", b.Number, rid, f.JobType, pipeline, stage, f.JobName, ts.Format(time.RFC3339), b.Result, b.Duration)
+					Logger.Printf("%d,%d,%s,%s,%s,%s,%s,%s,%d\n", b.Number, rid, f.JobType, pipeline, stage, f.JobName, ts.Format(time.RFC3339), b.Result, b.Duration)
 				} else {
-					//stage := b.Stage()
-					stage := getStage(f.JobName)
+					stage := b.Stage()
+					//stage := getStage(f.JobName)
 					fmt.Printf("%d,%d,%s,%s,%s,%s,%s,%s,%d\n", b.Number, rid, f.JobType, pipeline, stage, f.JobName, ts.Format(time.RFC3339), b.Result, b.Duration)
-
-					logger.Printf("Unable to find a parent upstream job - job started manually ?\n")
+					Logger.Printf("Unable to find a parent upstream job - job started manually ?\n")
 				}
 			} else {
-				logger.Printf("Build still running, skipping\n")
+				Logger.Printf("Build still running, skipping\n")
 			}
 		}
 	}
-	logger.Printf("==== itba stop ====\n")
+	Logger.Printf("==== itba stop ====\n")
 
 }
 
-func getStage(jobName string) string {
-	stg := "UNK"
-	for _, js := range conf.JobStage {
-		if strings.Contains(jobName, js.Suffix) {
-			stg = js.Stage
-			break
-		}
-	}
-	return stg
-}
+//func getStage(jobName string) string {
+//	stg := "UNK"
+//	for _, js := range Conf.JobStage {
+//		if strings.Contains(jobName, js.Suffix) {
+//			stg = js.Stage
+//			break
+//		}
+//	}
+//	return stg
+//}

@@ -1,15 +1,15 @@
 # list of jobs to be exported and their mapping to job type
 jobFilter:  
- - jobName: Data-Match 1 Commit
-   jobType: FETCH
- - jobName: Data-Match 2 Assemble
-   jobType: BUILD
- - jobName: Data-Match-Installer 3 Assemble Ansible
-   jobType: BUILD
+# - jobName: Data-Match 1 Commit
+#   jobType: FETCH
+# - jobName: Data-Match 2 Assemble
+#   jobType: BUILD
+# - jobName: Data-Match-Installer 3 Assemble Ansible
+#   jobType: BUILD
  - jobName: Data-Match-Installer 4 Deploy
    jobType: DEPLOY
- - jobName: Database 1 Download
-   jobType: BUILD
+# - jobName: Database 1 Download
+#   jobType: BUILD
  - jobName: Database 2 Deploy
    jobType: DEPLOY
 

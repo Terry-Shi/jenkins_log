@@ -1,4 +1,4 @@
-package main
+package util
 
 import (
 	"fmt"
@@ -23,7 +23,7 @@ type JobStage struct {
 	Stage  string
 }
 
-func loadConfig(c *Config, f string) {
+func LoadConfig(c *Config, f string) {
 
 	b, err := ioutil.ReadFile(f)
 

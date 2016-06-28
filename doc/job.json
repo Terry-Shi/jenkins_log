@@ -1,0 +1,157 @@
+{
+  "actions" : [
+    {
+      "parameterDefinitions" : [
+        {
+          "defaultParameterValue" : {
+            "value" : "huanxiya"
+          },
+          "description" : "",
+          "name" : "SSH_USERNAME",
+          "type" : "StringParameterDefinition"
+        },
+        {
+          "defaultParameterValue" : {
+
+          },
+          "description" : "",
+          "name" : "SSH_PASSWORD",
+          "type" : "PasswordParameterDefinition"
+        },
+        {
+          "defaultParameterValue" : {
+            "value" : "2016.04.r3"
+          },
+          "description" : "",
+          "name" : "RELEASE_VERSION",
+          "type" : "StringParameterDefinition"
+        },
+        {
+          "defaultParameterValue" : {
+            "value" : "dev"
+          },
+          "description" : "",
+          "name" : "ENVIRONMENT",
+          "type" : "ChoiceParameterDefinition",
+          "choices" : [
+            "dev",
+            "itg",
+            "pro"
+          ]
+        }
+      ]
+    }
+  ],
+  "description" : "",
+  "displayName" : "Data-Match-Installer 4 Deploy",
+  "displayNameOrNull" : null,
+  "name" : "Data-Match-Installer 4 Deploy",
+  "url" : "https://cas-cd.core.hpecorp.net:2543/job/Data-Match-Installer%204%20Deploy/",
+  "buildable" : true,
+  "builds" : [
+    {
+      "number" : 103,
+      "url" : "https://cas-cd.core.hpecorp.net:2543/job/Data-Match-Installer%204%20Deploy/103/"
+    },
+    {
+      "number" : 102,
+      "url" : "https://cas-cd.core.hpecorp.net:2543/job/Data-Match-Installer%204%20Deploy/102/"
+    }
+  ],
+  "color" : "blue",
+  "firstBuild" : {
+    "number" : 102,
+    "url" : "https://cas-cd.core.hpecorp.net:2543/job/Data-Match-Installer%204%20Deploy/102/"
+  },
+  "healthReport" : [
+    {
+      "description" : "Build stability: No recent builds failed.",
+      "iconClassName" : "icon-health-80plus",
+      "iconUrl" : "health-80plus.png",
+      "score" : 100
+    }
+  ],
+  "inQueue" : false,
+  "keepDependencies" : false,
+  "lastBuild" : {
+    "number" : 103,
+    "url" : "https://cas-cd.core.hpecorp.net:2543/job/Data-Match-Installer%204%20Deploy/103/"
+  },
+  "lastCompletedBuild" : {
+    "number" : 103,
+    "url" : "https://cas-cd.core.hpecorp.net:2543/job/Data-Match-Installer%204%20Deploy/103/"
+  },
+  "lastFailedBuild" : null,
+  "lastStableBuild" : {
+    "number" : 103,
+    "url" : "https://cas-cd.core.hpecorp.net:2543/job/Data-Match-Installer%204%20Deploy/103/"
+  },
+  "lastSuccessfulBuild" : {
+    "number" : 103,
+    "url" : "https://cas-cd.core.hpecorp.net:2543/job/Data-Match-Installer%204%20Deploy/103/"
+  },
+  "lastUnstableBuild" : null,
+  "lastUnsuccessfulBuild" : null,
+  "nextBuildNumber" : 104,
+  "property" : [
+    {
+      "parameterDefinitions" : [
+        {
+          "defaultParameterValue" : {
+            "name" : "SSH_USERNAME",
+            "value" : "huanxiya"
+          },
+          "description" : "",
+          "name" : "SSH_USERNAME",
+          "type" : "StringParameterDefinition"
+        },
+        {
+          "defaultParameterValue" : {
+            "name" : "SSH_PASSWORD"
+          },
+          "description" : "",
+          "name" : "SSH_PASSWORD",
+          "type" : "PasswordParameterDefinition"
+        },
+        {
+          "defaultParameterValue" : {
+            "name" : "RELEASE_VERSION",
+            "value" : "2016.04.r3"
+          },
+          "description" : "",
+          "name" : "RELEASE_VERSION",
+          "type" : "StringParameterDefinition"
+        },
+        {
+          "defaultParameterValue" : {
+            "name" : "ENVIRONMENT",
+            "value" : "dev"
+          },
+          "description" : "",
+          "name" : "ENVIRONMENT",
+          "type" : "ChoiceParameterDefinition",
+          "choices" : [
+            "dev",
+            "itg",
+            "pro"
+          ]
+        }
+      ]
+    }
+  ],
+  "queueItem" : null,
+  "concurrentBuild" : false,
+  "downstreamProjects" : [
+
+  ],
+  "scm" : {
+
+  },
+  "upstreamProjects" : [
+    {
+      "name" : "Data-Match-Installer 3 Assemble Ansible",
+      "url" : "https://cas-cd.core.hpecorp.net:2543/job/Data-Match-Installer%203%20Assemble%20Ansible/",
+      "color" : "blue"
+    }
+  ]
+}

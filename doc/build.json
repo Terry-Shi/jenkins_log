@@ -1,0 +1,107 @@
+{
+  "actions" : [
+    {
+      "parameters" : [
+        {
+          "name" : "SSH_USERNAME",
+          "value" : "chandan"
+        },
+        {
+          "name" : "SSH_PASSWORD"
+        },
+        {
+          "name" : "RELEASE_VERSION",
+          "value" : "2016.04.r3"
+        },
+        {
+          "name" : "ENVIRONMENT",
+          "value" : "pro"
+        }
+      ]
+    },
+    {
+      "causes" : [
+        {
+          "shortDescription" : "Started by user santhosh.chandan@hpe.com",
+          "userId" : "santhosh.chandan@hpe.com",
+          "userName" : "santhosh.chandan@hpe.com"
+        }
+      ]
+    },
+    {
+
+    },
+    {
+      "buildsByBranchName" : {
+        "refs/remotes/origin/continuous-delivery" : {
+          "buildNumber" : 103,
+          "buildResult" : null,
+          "marked" : {
+            "SHA1" : "e6f38f453fdcb92a41650cda54719878c23d8e34",
+            "branch" : [
+              {
+                "SHA1" : "e6f38f453fdcb92a41650cda54719878c23d8e34",
+                "name" : "refs/remotes/origin/continuous-delivery"
+              }
+            ]
+          },
+          "revision" : {
+            "SHA1" : "e6f38f453fdcb92a41650cda54719878c23d8e34",
+            "branch" : [
+              {
+                "SHA1" : "e6f38f453fdcb92a41650cda54719878c23d8e34",
+                "name" : "refs/remotes/origin/continuous-delivery"
+              }
+            ]
+          }
+        }
+      },
+      "lastBuiltRevision" : {
+        "SHA1" : "e6f38f453fdcb92a41650cda54719878c23d8e34",
+        "branch" : [
+          {
+            "SHA1" : "e6f38f453fdcb92a41650cda54719878c23d8e34",
+            "name" : "refs/remotes/origin/continuous-delivery"
+          }
+        ]
+      },
+      "remoteUrls" : [
+        "https://github.hpe.com/RnDLabsIT/address-service.git"
+      ],
+      "scmName" : ""
+    },
+    {
+
+    },
+    {
+
+    }
+  ],
+  "artifacts" : [
+
+  ],
+  "building" : false,
+  "description" : null,
+  "displayName" : "2016.04.r3",
+  "duration" : 809457,
+  "estimatedDuration" : 509155,
+  "executor" : null,
+  "fullDisplayName" : "Data-Match-Installer 4 Deploy 2016.04.r3",
+  "id" : "103",
+  "keepLog" : false,
+  "number" : 103,
+  "queueId" : 130725,
+  "result" : "SUCCESS",
+  "timestamp" : 1465202472358,
+  "url" : "https://cas-cd.core.hpecorp.net:2543/job/Data-Match-Installer%204%20Deploy/103/",
+  "builtOn" : "",
+  "changeSet" : {
+    "items" : [
+
+    ],
+    "kind" : "git"
+  },
+  "culprits" : [
+
+  ]
+}
