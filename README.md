@@ -51,4 +51,9 @@ https://groups.google.com/forum/#!topic/golang-nuts/urv3eP6ILaU
    1.1 HTTPS URL的访问 http://stackoverflow.com/questions/12122159/golang-how-to-do-a-https-request-with-bad-certificate
 2. 修改yaml文件,jobType and stage
 3. command:
-   go run itba.go config.go jenkins.go -URL=https://cas-cd.core.hpecorp.net:2543 -u= -p= -config=/Users/terry/IdeaProjects/jenkins_log/config.yaml 1> itba.csv.new 2> itba.log
+- Windows
+   cd C:/WORK/IDE/IdeaProjects/jenkins_log/src
+   go run itba.go -URL=https://cas-cd.core.hpecorp.net:2543 -u=1 -p=1 -config=C:\WORK\IDE\IdeaProjects\jenkins_log\config.yaml 1> JENKINS_JOB_CSTM.csv 2> itba.log
+   
+- Mac
+   go run itba.go -URL=https://cas-cd.core.hpecorp.net:2543 -u=1 -p=1 -config=/Users/terry/IdeaProjects/jenkins_log/config.yaml 1> JENKINS_JOB_CSTM.csv 2> itba.log
