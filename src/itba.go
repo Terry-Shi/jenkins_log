@@ -57,11 +57,12 @@ func main() {
 	var username string
 	var password string
 	var cfile string
-
-	flag.StringVar(&URL, "URL", "", "Jenkins server URL")
-	flag.StringVar(&username, "u", "", "username to connect to jenkins")
-	flag.StringVar(&password, "p", "", "password to connect to jenkins")
-	flag.StringVar(&cfile, "config", "config.yaml", "abs path of config file")
+	// windowns command line
+	//go run itba.go -URL=https://cas-cd.core.hpecorp.net:2543 -u=1 -p=1 -config=C:\WORK\IDE\IdeaProjects\jenkins_log\config.yaml 1> JENKINS_JOB_CSTM.csv 2> itba.log
+	flag.StringVar(&URL, "URL", "https://cas-cd.core.hpecorp.net:2543", "Jenkins server URL")
+	flag.StringVar(&username, "u", "1", "username to connect to jenkins")
+	flag.StringVar(&password, "p", "1", "password to connect to jenkins")
+	flag.StringVar(&cfile, "config", "C:\\WORK\\IDE\\IdeaProjects\\jenkins_log\\config.yaml", "abs path of config file")
 
 	flag.Parse()
 

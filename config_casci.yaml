@@ -1,0 +1,29 @@
+# list of jobs to be exported and their mapping to job type
+jobFilter:  
+ - jobName: Casci-4-Nexus-Deploy-NoDSL
+   jobType: DEPLOY
+ - jobName: Casci-5-Hudson-Master-Deploy-NoDSL
+   jobType: DEPLOY
+ - jobName: Casci-6-Hudson-Slave-Deploy-NoDSL
+   jobType: DEPLOY
+
+
+# job name to pipeline mapping 
+jobPipeline:
+    Casci-4-Nexus-Deploy-NoDSL: CASCI-Deploy
+    Casci-5-Hudson-Master-Deploy-NoDSL: CASCI-Deploy
+    Casci-6-Hudson-Slave-Deploy-NoDSL: CASCI-Deploy
+
+# job stage is defined by the suffix of the job name
+jobStage:
+ - suffix: "Commit"
+   stage: "BUILD"
+ - suffix: "Assemble"
+   stage: "BUILD"
+ - suffix: "Ansible"
+   stage: "BUILD"
+ - suffix: "Deploy"
+   stage: "DEPLOY"
+ - suffix: "Download"
+   stage: "DOWNLOAD"
+

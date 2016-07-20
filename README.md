@@ -23,7 +23,7 @@ Ref:
 https://rootpd.com/2016/02/04/setting-up-intellij-idea-for-your-first-golang-project/ 
 http://stackoverflow.com/questions/17771091/i-use-intellij-idea-as-golang-ide-and-system-environment-have-already-set-gopat
 
-#### How to run itba.go (when it depends on other source file)
+#### How to run itba.go (when it depends on other source file), and they are all in main package
 error msg:
 
     C:/Go\bin\go.exe run C:/WORK/IDE/IdeaProjects/jenkins_log/itba.go
@@ -57,3 +57,7 @@ https://groups.google.com/forum/#!topic/golang-nuts/urv3eP6ILaU
    
 - Mac
    go run itba.go -URL=https://cas-cd.core.hpecorp.net:2543 -u=1 -p=1 -config=/Users/terry/IdeaProjects/jenkins_log/config.yaml 1> JENKINS_JOB_CSTM.csv 2> itba.log
+
+4. import csv file
+   ssh -i ~/Desktop/HPIT.ppk  hos@16.202.70.65
+   https://itba.itcs.hpe.com:8443/bsf/login.form
